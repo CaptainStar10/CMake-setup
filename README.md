@@ -8,3 +8,5 @@ I decided to jump into graphics programing and started with *OpenGL 3.3*.I`ve be
 4. There are premade libraries(basic) for managing buffers, shaders, textures, theres a 3D camera implementation and a mesh(basic) class.
 
 *If there is some copyright stuff there, this repository will be deleted!*
+
+###### still nnot perfect =(
