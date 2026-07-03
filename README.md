@@ -1,6 +1,7 @@
 # CMake setup for OpenGL 3.3 and C++
 
-I decided to jump into graphics programing and started with *OpenGL 3.3*.I`ve been working with C++ for a few years and a year ago I started programing.
+I decided to jump into graphics programing and started with *OpenGL 3.3*.I`ve been working with C++ for a few years and now I started programing.
+I`m still learning =).
 **Note:**
 1. The noise library I have is curently functional for projects,but I`ll figure out why.
 2. The setup is prety big.
