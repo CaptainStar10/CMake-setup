@@ -9,4 +9,4 @@ I decided to jump into graphics programing and started with *OpenGL 3.3*.I`ve be
 
 *If there is some copyright stuff there, this repository will be deleted!*
 
-###### still nnot perfect =(
+###### still not perfect =(
