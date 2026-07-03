@@ -7,7 +7,7 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
-//#include"shaderClass.h"
+#include "shaderClass.h"
 
 struct Camera
 {
@@ -27,7 +27,7 @@ struct Camera
 
 	Camera(int width, int height, glm::vec3 position);
 
-	void Matrix(float FOVdeg, float nearPlane, float farPlane, GLuint shaderProgram, const char* uniform);
+	void Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform);
 	void Inputs(GLFWwindow* window);
 	//This is under implementation.DO NOT USE IT(is useless)
 	void NewInput(GLFWwindow* window);
