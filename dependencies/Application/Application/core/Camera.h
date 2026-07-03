@@ -29,5 +29,6 @@ struct Camera
 
 	void Matrix(float FOVdeg, float nearPlane, float farPlane, GLuint shaderProgram, const char* uniform);
 	void Inputs(GLFWwindow* window);
+	//This is under implementation.DO NOT USE IT(is useless)
 	void NewInput(GLFWwindow* window);
 };
