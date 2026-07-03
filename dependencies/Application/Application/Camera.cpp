@@ -1,7 +1,4 @@
 #include"core/Camera.h"
-#include <iostream>
-#include <cmath>
-
 
 Camera::Camera(int width, int height, glm::vec3 position)
 {
@@ -29,31 +26,29 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane,GLuint shaderP
 
 void Camera::Inputs(GLFWwindow* window)
 {
-	//if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-	//	Position += speed * Orientation;
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		Position += speed * Orientation;
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		Position += speed / 10 * -glm::normalize(glm::cross(Orientation, Up));
-	//if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-	//	Position += speed * -Orientation;
+		Position += speed * -glm::normalize(glm::cross(Orientation, Up));
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		Position += speed * -Orientation;
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		Position += speed / 10 * glm::normalize(glm::cross(Orientation, Up));
-	//if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-	//	Position += speed / 10 * Up;
-	//if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-	//	Position += speed / 10 * -Up;
-	//	//speed = 0.001f;
-	//if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
-	//	//Position += speed * -Up;
-	//	speed = 0.1f;
-	//if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
-	//	speed = 0.4f;
-	//else if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_RELEASE)
-	//	speed = 0.1f;
+		Position += speed * glm::normalize(glm::cross(Orientation, Up));
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		Position += speed * Up;
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		Position += speed * -Up;
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+		Position += speed * -Up;
+	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+		speed = 0.4f;
+	else if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_RELEASE)
+		speed = 0.1f;
 
 	glfwGetWindowSize(window, &width, &height);
 
 
-	/*// Handles mouse inputs
+	// Handles mouse inputs
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 	{
 		// Hides mouse cursor
@@ -98,15 +93,5 @@ void Camera::Inputs(GLFWwindow* window)
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		// Makes sure the next time the camera looks around it doesn't jump
 		firstClick = true;
-	}*/
-
-	std::cout << '\r' << "X:" << floor(Position.x) << ' ' << "Y:" << floor(Position.y) << ' ' << "Z:" << floor(Position.z);
-}
-
-void Camera::NewInput(GLFWwindow* window)
-{
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-	{
-		Position += speed * Orientation;
 	}
 }
