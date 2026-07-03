@@ -1,4 +1,4 @@
-# Cmake setup for OpenGL 3.3 and C++
+# CMake setup for OpenGL 3.3 and C++
 
 I decided to jump into graphics programing and started with *OpenGL 3.3*.I`ve been working with C++ for a few years and a year ago I started programing.
 **Note:**
