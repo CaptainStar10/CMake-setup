@@ -8,10 +8,16 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-struct Shader
+class Shader
 {
+public:
 	unsigned int ID;
+	Shader() = default;
 	Shader(const char* VertexPath, const char* FragmentPath);
+	void OpenFiles(const char* VertexPath, const char* FragmentPath);
 	void Activate();
 	void Delete();
+
+protected:
+	void GetPath(const char* VertexPath, const char* FragmentPath);
 };
