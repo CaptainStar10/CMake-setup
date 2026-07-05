@@ -2,6 +2,14 @@
 
 Shader::Shader(const char* VertexPath, const char* FragmentPath)
 {
+    this->GetPath(VertexPath, FragmentPath);
+}
+void Shader::OpenFiles(const char* VertexPath, const char* FragmentPath)
+{
+    this->GetPath(VertexPath, FragmentPath);
+}
+void Shader::GetPath(const char* VertexPath, const char* FragmentPath)
+{
     std::string vertexCode;
     std::string fragmentCode;
     std::ifstream vShaderFile;
@@ -32,19 +40,19 @@ Shader::Shader(const char* VertexPath, const char* FragmentPath)
     const char* vertexSource = vertexCode.c_str();
     const char* fragmentSource = fragmentCode.c_str();
 
-	unsigned int VertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(VertexShader, 1, &vertexSource, NULL);
-	glCompileShader(VertexShader);
-	unsigned int FragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(FragmentShader, 1, &fragmentSource, NULL);
-	glCompileShader(FragmentShader);
-	ID = glCreateProgram();
-	glAttachShader(ID, VertexShader);
-	glAttachShader(ID, FragmentShader);
-	glLinkProgram(ID);
+    unsigned int VertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(VertexShader, 1, &vertexSource, NULL);
+    glCompileShader(VertexShader);
+    unsigned int FragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(FragmentShader, 1, &fragmentSource, NULL);
+    glCompileShader(FragmentShader);
+    ID = glCreateProgram();
+    glAttachShader(ID, VertexShader);
+    glAttachShader(ID, FragmentShader);
+    glLinkProgram(ID);
 
-	glDeleteShader(VertexShader);
-	glDeleteShader(FragmentShader);
+    glDeleteShader(VertexShader);
+    glDeleteShader(FragmentShader);
 }
 void Shader::Activate()
 {
