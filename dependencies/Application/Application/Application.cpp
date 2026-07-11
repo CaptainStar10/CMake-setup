@@ -1,11 +1,15 @@
 #include "core/Application.hpp"
 
-void FrameBufferSizeCallback(GLFWwindow* window, int width, int height)
+//###############################################################
+//					Application initialization
+//###############################################################
+
+void FrameBufferCallback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 }
 
-void app::CreateApplication(app::Application_Data& data)
+Application::Application()
 {
 	glfwInit();
 
@@ -13,29 +17,47 @@ void app::CreateApplication(app::Application_Data& data)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	data.window = glfwCreateWindow(data.WindowWidth, data.WindowHeight, data.name, NULL, NULL);
-	data.monitor = glfwGetPrimaryMonitor();
+	this->data.window = glfwCreateWindow(this->data.WindowWidth, this->data.WindowHeight, this->data.name, NULL, NULL);
+	this->data.monitor = glfwGetPrimaryMonitor();
 
-	glfwMakeContextCurrent(data.window);
-	glfwSetFramebufferSizeCallback(data.window, FrameBufferSizeCallback);
+	if (this->data.window == NULL)
+	{
+		std::cout << "Failed to create GLFW window!\n";
+		glfwTerminate();
+		return;
+	}
+	if (this->data.monitor == NULL)
+		std::cout << "Failed to create GLFW monitor!\n";
+
+	glfwMakeContextCurrent(this->data.window);
+	glfwSetFramebufferSizeCallback(this->data.window, FrameBufferCallback);
 	gladLoadGL();
-	glEnable(GL_DEPTH_TEST);
 }
 
-void app::SwapBuffers(app::Application_Data& data)
+Application::~Application()
 {
-	glfwSwapBuffers(data.window);
-	glfwPollEvents();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-void app::Terminate(app::Application_Data& data)
-{
-	glfwDestroyWindow(data.window);
+	glfwDestroyWindow(this->data.window);
 	glfwTerminate();
 }
 
-bool app::WindowNotClosed(app::Application_Data& data)
+
+//###############################################################
+//							Application
+//###############################################################
+
+
+void Application::ProcessInput()
 {
-	return glfwWindowShouldClose(data.window);
+	if (glfwGetKey(this->data.window, Key::Key_F11) == GLFW_PRESS)
+	{
+		if (this->data.fullscreen == false)
+			glfwSetWindowMonitor(this->data.window, this->data.monitor, 0, 0, this->data.MonitorWidth, this->data.MonitorHeight, 120);
+		if (this->data.fullscreen == true)
+			glfwSetWindowMonitor(this->data.window, 0, 0, 0, this->data.MonitorWidth, this->data.MonitorHeight, 120);
+		this->data.fullscreen = !this->data.fullscreen;
+	}
+	if (glfwGetKey(this->data.window, Key::Key_P) == GLFW_PRESS)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	if (glfwGetKey(this->data.window, Key::Key_L) == GLFW_PRESS)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
